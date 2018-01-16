@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>piedra papel tijeras</title>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <div id="opciones">
+        <input type="image" data-jugada="Piedra" src="http://i61.tinypic.com/2urxzsh.png"/>
+        <input type="image" data-jugada="Papel" src="http://i58.tinypic.com/abilgp.png"/>
+        <input type="image" data-jugada="Tijeras" src="http://i58.tinypic.com/20f722u.png"/>
+      </div>
+
+      <div id="resultado"></div>
+
+      <script type="text/javascript">
+
+$(document).ready(function(){
+
+$('#opciones input').click(function(){
+  let jugada_usuario=$(this).attr('data-jugada');
+  jugar(jugada_usuario);
+});
+
+      function jugar(jugada_usuario){
+
+      function aleatorio(minimo,maximo){
+
+    		var numero = Math.floor(Math.random() * (maximo - minimo + 1) + minimo);
+    		var eleccion = opciones[numero];
+    		return eleccion;
+        }
+
+        var mensaje;
+        var opciones = ["Piedra", "Papel", "Tijeras"];
+        var opcionMaquina = aleatorio(0,2);
+        console.log (opcionMaquina);
+
+        if(jugada_usuario === opcionMaquina)
+			{
+				mensaje = "<h2>¡Es un empate!<br /><img src='http://i60.tinypic.com/2m4dhso.png'/></h2>";
+			}
+
+      else if((jugada_usuario === "Piedra" && opcionMaquina === "Tijeras") ||
+              (jugada_usuario === "Papel" && opcionMaquina === "Piedra") ||
+              (jugada_usuario === "Tijeras" && opcionMaquina == "Papel")
+            )
+            {
+            	mensaje = "<h2>¡Has ganado!<br /><img src='http://i62.tinypic.com/1ze8uau.png'/></h2>";
+            } else {
+				            mensaje = "<h2>¡Has perdido!<br /><img src='http://i57.tinypic.com/6r3dcg.png'/></h2>";
+			              }
+
+        document.getElementById('resultado').innerHTML =
+
+            "<p><span>Tú</span> has elegido " + "<span>" + jugada_usuario + "</span>" +
+            " y <span> la Máquina </span> ha elegido " + "<span>" + opcionMaquina + "</span>"
+            + ".</p>" + mensaje;
+          }
+        });
+      </script>
+  </body>
+</html>
